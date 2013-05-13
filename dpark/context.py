@@ -181,10 +181,12 @@ class DparkContext(object):
             logger.error("got signal %d, exit now", signm)
             self.scheduler.shutdown()
 
-        signal.signal(signal.SIGTERM, handler)
-        signal.signal(signal.SIGHUP, handler)
-        signal.signal(signal.SIGABRT, handler)
-        signal.signal(signal.SIGQUIT, handler)
+        try:
+            signal.signal(signal.SIGTERM, handler)
+            signal.signal(signal.SIGHUP, handler)
+            signal.signal(signal.SIGABRT, handler)
+            signal.signal(signal.SIGQUIT, handler)
+        except: pass
         
         try:
             from rfoo.utils import rconsole
